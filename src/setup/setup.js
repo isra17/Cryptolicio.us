@@ -41,21 +41,14 @@ $(document).ready(function() {
     $('body').animate({'opacity':'1'},500);
 });
 
-$('.jumbotron .btn').click(function() {
-    $('html, body').animate({
-        scrollTop: $(".setup-key").offset().top - 50
-    }, 500);
-});
+function scrollToAnchor(href){
+    var parts = href.split("#");
+    var aid = parts[1];
+    var tag = $("a[name='"+ aid +"']");
+    $('html,body').animate({scrollTop: tag.offset().top - 50},'slow');
+};
 
-
-$('#btn-step2').click(function() {
-    $('html, body').animate({
-        scrollTop: $(".share-key").offset().top - 50
-    }, 500);
-});
-
-$('#btn-step3').click(function() {
-    $('html, body').animate({
-        scrollTop: $(".add-keys").offset().top - 50
-    }, 500);
+$('.btn-scroll').click(function(btn) {
+    event.preventDefault();
+    scrollToAnchor(this.href);
 });
