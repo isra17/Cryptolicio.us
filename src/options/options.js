@@ -9,10 +9,12 @@
    function generateKeyPair(){
         $('.alert').hide();
         var form = $('#generateKeyPairForm');
-        var keyPair = openpgp.generate_key_pair(1,parseInt(form.find('#numBits').val(), 10), form.find('#name').val() + ' <' + form.find('#email').val() + '>', form.find('#password').val());
+        var email = form.find('#email').val();
+        var keyPair = openpgp.generate_key_pair(1,parseInt(form.find('#numBits').val(), 10), form.find('#name').val() + ' <' + email + '>', form.find('#password').val());
         openpgp.keyring.importPrivateKey(keyPair.privateKeyArmored, form.find('#password').val());
         keyPair.publicKeyArmored = keyPair.publicKeyArmored.replace(/\n\s+\n=/, '\n=');
         openpgp.keyring.importPublicKey(keyPair.publicKeyArmored);
+        KeyServer.post(email, keyPair.publicKeyArmored);
         openpgp.keyring.store();
         parsePrivateKeys();
         parsePublicKeys();
