@@ -28,8 +28,6 @@ var defaultPGPExample = "-----BEGIN PGP MESSAGE-----" +
 	"/w==" +
 	"=U1uU -----END PGP MESSAGE-----";
 
-
-
 var express = require('express');
 var app = express();
 
@@ -69,12 +67,12 @@ var defaultEntry = new Entry({
 	value: defaultPGPExample
 });
 
-// defaultEntry.save(function (err, fluffy) {
-//   if (err) // TODO handle the error
-//   	console.log(err)
-//   else
-//   	console.log('saved');
-// });
+defaultEntry.save(function(err, fluffy) {
+	if (err) // TODO handle the error
+		console.log(err)
+	else
+		console.log('saved');
+});
 
 /************/
 /* REST API */
@@ -113,6 +111,24 @@ app.post('/api', function(req, res) {
 	}
 });
 
+app.delete('/api', function(req, res) {
+	Entry.find({},
+		function(err, docs) {
+			if (!err) {
+				console.log("found : " + docs.length + " documents ! deleting ...");
+				docs.forEach(function(doc) {
+					doc.remove();
+				});
+
+				res.send("200 OK");
+			} else {
+				throw err;
+			}
+
+		}
+	);
+});
+
 app.get('/api/:email', function(req, res) {
 	res.json(req.entry);
 });
@@ -141,6 +157,47 @@ app.param('email', function(req, res, next, id) {
 	}
 });
 
+
+// var path = require('path'),
+// 	templatesDir = path.join(__dirname, 'templates'),
+// 	emailTemplates = require('email-templates');
+
+// emailTemplates(templatesDir, function(err, template) {
+
+// 	// Render a single email with one template
+// 	var locals = {
+// 		pasta: 'Spaghetti'
+// 	};
+// 	template('pasta-dinner', locals, function(err, html, text) {
+// 		// ...
+// 	});
+
+// 	// Render multiple emails with one template
+// 	var locals = [{
+// 		pasta: 'Spaghetti'
+// 	}, {
+// 		pasta: 'Rigatoni'
+// 	}];
+// 	var Render = function(locals) {
+// 		this.locals = locals;
+// 		this.send = function(err, html, text) {
+// 			// ...
+// 		};
+// 		this.batch = function(batch) {
+// 			batch(this.locals, this.send);
+// 		};
+// 	};
+// 	template('pasta-dinner', true, function(err, batch) {
+// 		for (var user in users) {
+// 			var render = new Render(users[user]);
+// 			render.batch(batch);
+// 		}
+// 	});
+
+// });
+
+
+
 var port = process.env.PORT || 3000;
 app.listen(port);
-console.log('Listening on port 3000');
+console.log('Listening on port : ' + port);

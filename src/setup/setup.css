@@ -45,7 +45,9 @@ body {
 	color: #fff;
 	font-family: 'Lato', sans-serif;
 	font-weight:700;
+letter-spacing: -3px;	
 }
+
 
 h2 {
 	font-family: 'Merriweather', sans-serif;
@@ -55,9 +57,10 @@ h2 {
 
 .jumbotron .lead {
 	color: #fff;
-	line-height: 5;
-	text-shadow:1px 1px #2d2d2d;
+	line-height: 2;
+	text-shadow:2px 2px #2d2d2d;
 	font-weight:300;
+	font-size: 60px;
 }
 
 .jumbotron .btn {

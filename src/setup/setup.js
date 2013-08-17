@@ -44,7 +44,9 @@
                 });
             });
         });
-    })
+
+        $('#searchKey').submit(searchKey);    });
+
 })();
 
 $(document).ready(function() {
@@ -91,6 +93,48 @@ $('.btn-scroll').click(function() {
 $('#share-key').click(function() {
     getPublicKey();
 });
+
+   function parsePublicKeys(){
+      var keys = openpgp.keyring.publicKeys;
+      $('#publicKeyTable>tbody>tr').remove();
+      for(var k=0;k<keys.length;k++){
+          var key = keys[k];
+          var user = gCryptUtil.parseUser(key.obj.userIds[0].text);
+          $('#publicKeyTable>tbody').append(
+              '<tr><td>'+user.userName+'</td>'+
+              '<td>'+user.userEmail+'</td>'+
+              '<td>'+util.hexstrdump(key.keyId)+'</td>'+
+              '<td><a href="#public'+k+'" data-toggle="modal">Show key</a><div class="modal" id="public'+k+'">'+
+                  '<a href="#" class="close" data-dismiss="modal">Close</a><br/ ><textarea>'+key.armored+'</textarea></div></td>'+
+              '<td class="removeLink" id="'+k+'"><a href="#">Remove</a></td></tr>');
+          $('#public'+k).hide();
+          $('#public'+k).modal({backdrop: true, show: false});
+      }
+      $('#publicKeyTable .removeLink').click(function(e){
+        openpgp.keyring.removePublicKey(e.currentTarget.id);
+        openpgp.keyring.store();
+        parsePublicKeys();
+        });
+   }
+
+function searchKey(event) {
+        var self = $(this);
+        var term = self.find('#search_term').val();
+        var listEl = self.find('ul');
+        listEl.fadeIn();
+        KeyServer.getAll(email)
+        .done(function(keys){
+            $.each(keys, function(i, key){
+                openpgp.keyring.importPublicKey(key);
+            })
+
+            openpgp.keyring.store();
+            parsePublicKeys();
+        });
+
+        event.preventDefault();
+        return false;
+    }
 
 function getPublicKey(){
     var keys = openpgp.keyring.privateKeys;
