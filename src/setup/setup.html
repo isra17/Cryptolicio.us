@@ -95,7 +95,7 @@
                     <h2>The key generation failed. Please try again.</h2>
                 </div>
 
-                <a href="#share-key" class="btn btn-large btn-success btn-scroll">Next step: Share your <strong>public</strong> key</a>
+                <a href="#share-key" id="share-key" class="btn btn-large btn-success btn-scroll">Next step: Share your <strong>public</strong> key</a>
             </div>
         </div>
 
@@ -105,11 +105,17 @@
         <!-- STEP 2 : SHARE-KEY -->
         <div class="share-key row alt-bg max-height hideme">
             <div class="container" name="share-key">
-            <a name="share-key"></a>
-            <h2>Share your public key</h2>
-             <label for="mit">Upload the public key on pgp.mit.edu to easily share it: </label>
-            <input type="checkbox" name="mit" checked="checked" id="mit"/><br />
-            <a href="#add-keys" class="btn btn-large btn-success btn-scroll">Next step: Find your friend's keys</a>
+            <div class="row">
+                <a name="share-key"></a>
+                <h2>Share your public key</h2>
+            </div><div class="row">   
+                <p>This is your public key:</p>
+                <textarea id="key-txtarea"></textarea>
+            </div><div class="row">  
+                <a id="update" class="btn"> Upload the public key on the cloud to easily share it</a>
+            </div><div class="row">      
+                <a href="#add-keys" class="btn btn-large btn-success btn-scroll">Next step: Find your friend's keys</a>
+            </div>
             </div>
         </div>
 

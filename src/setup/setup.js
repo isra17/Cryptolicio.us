@@ -39,6 +39,8 @@ $(document).ready(function() {
     $('.max-height').css('min-height', windowHeight);
 
     $('body').animate({'opacity':'1'},1000);
+
+    getPublicKey();
 });
 
 $(window).scroll( function(){
@@ -67,7 +69,22 @@ function scrollToAnchor(href){
     $('html,body').animate({scrollTop: tag.offset().top},'slow');
 };
 
-$('.btn-scroll').click(function(btn) {
+
+$('.btn-scroll').click(function() {
     event.preventDefault();
     scrollToAnchor(this.href);
 });
+
+$('#share-key').click(function() {
+    getPublicKey();
+});
+
+function getPublicKey(){
+    var keys = openpgp.keyring.privateKeys;
+    var lastKey = keys.length > 0? keys[keys.length - 1]: null;
+    if(lastKey) {
+      var pubKey = lastKey.obj.extractPublicKey();
+      var keyName = lastKey.obj.userIds.length > 0? lastKey.obj.userIds[0].text: 'Unnamed key';
+      $('#key-txtarea').val(pubKey);
+    }
+}

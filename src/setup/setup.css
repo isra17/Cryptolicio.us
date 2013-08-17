@@ -73,3 +73,8 @@ h2 {
 .alt-bg {
 	background-color:#e2ffe2;
 }
+
+#key-txtarea {
+	height:480px;
+	width:520px;
+}
