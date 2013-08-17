@@ -17,15 +17,14 @@
                 if(keyPair) {
                     $('#wait').fadeOut();
                     $('#done').fadeIn();
+                    $('#share-key').animate({'opacity':'1'},500);
                     if(form.find('input[name=mit]').val() === "on") {
                         $.post('http://pgp.mit.edu:11371/pks/add', {
                             keytext: keyPair.publicKeyArmored
                         });
                     }
                 } else {
-                    $('#wait').fadeOut();
-                    $('#failed').fadeIn();
-                }
+                    $('#wait').fadeOut();                }
 
             });
 
