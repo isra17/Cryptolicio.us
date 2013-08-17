@@ -35,7 +35,7 @@
 })();
 
 $(document).ready(function() {
-    windowHeight = $(window).height() - 150;
+    windowHeight = $(window).height();
     $('.max-height').css('min-height', windowHeight);
 
     $('body').animate({'opacity':'1'},500);
@@ -43,19 +43,19 @@ $(document).ready(function() {
 
 $('.jumbotron .btn').click(function() {
     $('html, body').animate({
-        scrollTop: $(".setup-key").offset().top - 100
+        scrollTop: $(".setup-key").offset().top - 50
     }, 500);
 });
 
 
 $('#btn-step2').click(function() {
     $('html, body').animate({
-        scrollTop: $(".share-key").offset().top
+        scrollTop: $(".share-key").offset().top - 50
     }, 500);
 });
 
 $('#btn-step3').click(function() {
     $('html, body').animate({
-        scrollTop: $(".add-keys").offset().top
+        scrollTop: $(".add-keys").offset().top - 50
     }, 500);
 });
