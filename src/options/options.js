@@ -168,6 +168,41 @@
        }
    }
 
+    function searchKey(event) {
+        var self = $(this);
+        var term = self.find('#search_term').val();
+        var listEl = self.find('ul');
+        listEl.fadeIn();
+        KeyServer.search(term)
+        .done(function(items){
+            $.each(items, function(key, item){
+                $('<li>'+
+                      '<a tabindex="-1" href="'+item.keyUrl+'">'+item.name+'<span class="date">'+item.date+'</span></a>'+
+                  '</li>')
+                .appendTo(listEl)
+                .find('a')
+                .click(function(e){
+                    var url = $(this).attr('href');
+                    KeyServer.get(url)
+                    .done(function(key){
+                        openpgp.keyring.importPublicKey(key);
+                        openpgp.keyring.store();
+                        parsePublicKeys();
+
+                        self.find('ul').fadeOut(function(){
+                          $(this).find('li').remove();
+                        });
+                    });
+                    e.preventDefault();
+                    return false;
+                })
+            })
+        });
+
+        event.preventDefault();
+        return false;
+    }
+
     function onLoad(){
         openpgp.init();
         parsePrivateKeys();
@@ -194,6 +229,7 @@
         $('#insertPrivateKeyFormSubmit').click(insertPrivateKey);
         $('#generateKeyPairFormSubmit').click(generateKeyPair);
         $('#insertPublicKeyFormSubmit').click(insertPublicKey);
+        $('#searchKey').submit(searchKey);
 
         $('#send-key-form').submit(function(){
             var key = $('#homeSpan .pub-key').val();
