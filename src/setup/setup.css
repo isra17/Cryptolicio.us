@@ -1,0 +1,69 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:100,300,700);
+@import url(http://fonts.googleapis.com/css?family=Merriweather);
+
+body {
+	opacity:0;
+	font-family: 'Lato', sans-serif;
+	font-weight:300;
+	font-size: 16px;
+}
+
+::selection {
+	background: #fff2a8;
+}
+::-moz-selection {
+	background: #fff2a8;
+}
+
+.jumbotron {
+	padding: 190px 0px 190px 0px;
+	text-align: center;
+	position: relative;
+	margin-bottom: 20px;
+	line-height: 1;
+	background-image:url('bg-jumbotron.jpg');
+	font-family: 'Lato', sans-serif;
+	font-weight:100;
+	border-bottom: 1px solid #ddd; 
+	height: 100%;
+}
+
+.jumbotron-inner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.jumbotron h1 {
+	font-size: 120px;
+	line-height: 1;
+	text-shadow:2px 2px #2d2d2d;
+	color: #fff;
+	font-family: 'Lato', sans-serif;
+	font-weight:700;
+}
+
+h2 {
+	font-family: 'Merriweather', sans-serif;
+	font-weight:400;
+}
+
+.jumbotron .lead {
+	color: #fff;
+	line-height: 5;
+	text-shadow:1px 1px #2d2d2d;
+	font-weight:300;
+}
+
+.jumbotron .btn {
+	font-size: 21px;
+	padding: 14px 24px;
+}
+
+.setup_private_key {
+
+}
+
+.alt-bg {
+	background-color:#e2ffe2;
+}

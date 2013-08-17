@@ -33,3 +33,29 @@
         });
     })
 })();
+
+$(document).ready(function() {
+    windowHeight = $(window).height() - 150;
+    $('.max-height').css('min-height', windowHeight);
+
+    $('body').animate({'opacity':'1'},500);
+});
+
+$('.jumbotron .btn').click(function() {
+    $('html, body').animate({
+        scrollTop: $(".setup-key").offset().top - 100
+    }, 500);
+});
+
+
+$('#btn-step2').click(function() {
+    $('html, body').animate({
+        scrollTop: $(".share-key").offset().top
+    }, 500);
+});
+
+$('#btn-step3').click(function() {
+    $('html, body').animate({
+        scrollTop: $(".add-keys").offset().top
+    }, 500);
+});
