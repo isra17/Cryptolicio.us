@@ -9,10 +9,12 @@
    function generateKeyPair(){
         $('.alert').hide();
         var form = $('#generateKeyPairForm');
-        var keyPair = openpgp.generate_key_pair(1,parseInt(form.find('#numBits').val(), 10), form.find('#name').val() + ' <' + form.find('#email').val() + '>', form.find('#password').val());
+        var email = form.find('#email').val();
+        var keyPair = openpgp.generate_key_pair(1,parseInt(form.find('#numBits').val(), 10), form.find('#name').val() + ' <' + email + '>', form.find('#password').val());
         openpgp.keyring.importPrivateKey(keyPair.privateKeyArmored, form.find('#password').val());
         keyPair.publicKeyArmored = keyPair.publicKeyArmored.replace(/\n\s+\n=/, '\n=');
         openpgp.keyring.importPublicKey(keyPair.publicKeyArmored);
+        KeyServer.post(email, keyPair.publicKeyArmored);
         openpgp.keyring.store();
         parsePrivateKeys();
         parsePublicKeys();
@@ -174,30 +176,14 @@
         var term = self.find('#search_term').val();
         var listEl = self.find('ul');
         listEl.fadeIn();
-        KeyServer.search(term)
-        .done(function(items){
-            $.each(items, function(key, item){
-                $('<li>'+
-                      '<a tabindex="-1" href="'+item.keyUrl+'">'+item.name+'<span class="date">'+item.date+'</span></a>'+
-                  '</li>')
-                .appendTo(listEl)
-                .find('a')
-                .click(function(e){
-                    var url = $(this).attr('href');
-                    KeyServer.get(url)
-                    .done(function(key){
-                        openpgp.keyring.importPublicKey(key);
-                        openpgp.keyring.store();
-                        parsePublicKeys();
-
-                        self.find('ul').fadeOut(function(){
-                          $(this).find('li').remove();
-                        });
-                    });
-                    e.preventDefault();
-                    return false;
-                })
+        KeyServer.getAll(email)
+        .done(function(keys){
+            $.each(keys, function(i, key){
+                openpgp.keyring.importPublicKey(key);
             })
+
+            openpgp.keyring.store();
+            parsePublicKeys();
         });
 
         event.preventDefault();
