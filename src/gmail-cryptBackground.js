@@ -251,3 +251,15 @@ document.onload = onLoad();
 function showMessages(str){
   console.log(str);
 }
+
+
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    console.log(request);
+    console.log(sender);
+    console.log(sendResponse);
+    
+    if (request.greeting == "hello"){
+      sendResponse({farewell: "goodbye"});
+    }
+});
