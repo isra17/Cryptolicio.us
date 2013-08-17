@@ -1,7 +1,7 @@
 (function(){
     $(function(){
         // Bad hack because the event is sent twice :(
-        $('#key-form').submit(_.throttle(function(e){
+        $('#key-form').submit(function(e){
             $('#failed').hide();
             $('#done').hide();
 
@@ -29,7 +29,7 @@
             });
 
             return false;
-        }, 60000));
+        });
 
         $('#sync_contact').click(function(){
             chrome.extension.sendRequest({
