@@ -14,7 +14,10 @@
 
     Crypt.us.Options.importKeys = function(keys) {
         $.each(keys, function(i, key){
-            openpgp.keyring.importPublicKey(key);
+            try{
+                key = key.replace(/\n\s+\n=/, '\n=');
+                openpgp.keyring.importPublicKey(key);
+            }catch(e){}
         })
 
         openpgp.keyring.store();

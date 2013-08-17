@@ -42,10 +42,13 @@
                         });
                     });
                 });
+
+                // Add some feedback
             });
         });
 
-        $('#searchKey').submit(searchKey);    });
+        $('#searchKey').submit(searchKey);
+    });
 
 })();
 
