@@ -75,7 +75,12 @@
       for(var k=0;k<keys.length;k++){
           var key = keys[k];
           var user = gCryptUtil.parseUser(key.obj.userIds[0].text);
-          $('#privateKeyTable>tbody').append('<tr><td class="removeLink" id="'+k+'"><a href="#">remove</a></td><td>'+user.userName+'</td><td>'+user.userEmail+'</td><td><a href="#private'+k+'" data-toggle="modal">show key</a><div class="modal" id="private'+k+'"><a class="close" data-dismiss="modal">Close</a><br/ >'+key.armored.replace(/\n/g,'<br/ >')+'</div></td></tr>');
+          $('#privateKeyTable>tbody').append(
+              '<tr><td>'+user.userName+'</td>'+
+              '<td>'+user.userEmail+'</td>'+
+              '<td><a href="#private'+k+'" data-toggle="modal">show key</a><div class="modal" id="private'+k+'">'+ 
+                  '<a class="close" data-dismiss="modal">Close</a><br/ ><textarea>'+key.armored+'</textarea></div></td>'+
+              '<td class="removeLink" id="'+k+'"><a href="#">remove</a></td></tr>');
           $('#private'+k).hide();
           $('#private'+k).modal({backdrop: true, show: false});
       }

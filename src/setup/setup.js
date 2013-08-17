@@ -18,7 +18,7 @@
                         keytext: keyPair.publicKeyArmored
                     });
                 }
-            });            
+            });
 
             return e.preventDefault();
         });

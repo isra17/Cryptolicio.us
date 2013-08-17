@@ -12,30 +12,29 @@
         <link rel="stylesheet" type="text/css" href="options.css"/>
     </head>
 
-<body>
-    <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container">
-                <div class="nav-collapse">
-                    <ul class="nav" id="navbar">
-                    <li><a href="#homeSpan" class="linkLocal">home</a></li>
-                    <li><a href="#optionsSpan" class="linkLocal">options</a></li>
-                    <li><a href="#privateKeySpan" class="linkLocal">my keys</a></li>
-                    <li><a href="#publicKeySpan" class="linkLocal">friends' keys</a></li>
-                    <li><a href="#helpSpan" class="linkLocal">help</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-      <header class="jumbotron subhead">
+<body>    
+    <header class="jumbotron subhead">
         <div class="container">
-            <h1>mymail-crypt for Gmail options</h1>
+            <h1>Cryptolicio.us' options</h1>
             <div class="subnav subnav-fixed">
             </div>
         </div>
-      </header>
+    </header>
 
+    <div id="menu">
+        <div class="row">
+            <div class="span2">
+                <h2>Settings</h2>
+                <ul class="nav nav-pills nav-stacked" id="navbar">
+                    <li><a href="#homeSpan" class="linkLocal">Home</a></li>
+                    <li><a href="#optionsSpan" class="linkLocal">General</a></li>
+                    <li><a href="#privateKeySpan" class="linkLocal">My keys</a></li>
+                    <li><a href="#publicKeySpan" class="linkLocal">Contacts' keys</a></li>
+                    <li><a href="#helpSpan" class="linkLocal">Help</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <div id="mainColumn">
             <span id="homeSpan">
@@ -56,20 +55,20 @@
                 </p>
             </span>
             <span id="optionsSpan">
-                <h2>options</h2>
+                <h2>General</h2>
                 <strong>Please make sure that you reload your gmail page to be sure these changes take effect.</strong>
                 <form id="optionsForm" class="well">
                     <label class="checkbox">
-                        <input type="checkbox" id="stopAutomaticDrafts">stop automatic draft uploading. (EXPERIMENTAL -- Currently only works with "New Compose", does not support "popped out" compose mode)
+                        <input type="checkbox" id="stopAutomaticDrafts">Stop automatic draft uploading. (EXPERIMENTAL -- Currently only works with "New Compose", does not support "popped out" compose mode)
                     </label>
                     <label class="checkbox">
-                        <input type="checkbox" id="includeMyself">add myself as an encrypted recipient on all messages. Allows decrypting sent messages.
+                        <input type="checkbox" id="includeMyself">Add myself as an encrypted recipient on all messages. Allows decrypting sent messages.
                     </label>
                     <label class="checkbox">
-                        <input type="checkbox" id="showComment">show comment in OpenPGP messages.
+                        <input type="checkbox" id="showComment">Show comment in OpenPGP messages.
                     </label>
                     <label class="checkbox">
-                        <input type="checkbox" id="showVersion">show version in OpenPGP messages.
+                        <input type="checkbox" id="showVersion">Show version in OpenPGP messages.
                     </label>
                     <br/>
                     <div class="form-actions">
@@ -78,15 +77,17 @@
                 </form>
             </span>
             <span id="privateKeySpan">
-                <h2>my private keys:</h2>
+                <h2>My keys</h2>
                 <table id="privateKeyTable" class="table table-condensed">
                 <thead>
                     <tr>
-                    <th>
-                    </th>
                     <th>name
                     </th>
                     <th>email
+                    </th>
+                    <th>
+                    </th>
+                    <th>
                     </th>
                     </tr>
                 </thead>

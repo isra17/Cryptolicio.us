@@ -9,7 +9,8 @@
     "permissions":[
         "https://*/*",
         "http://*/*",
-        "contextMenus"
+        "contextMenus",
+        "clipboardWrite"
     ],
     "background": {
         "scripts":[
