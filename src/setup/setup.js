@@ -1,6 +1,9 @@
 (function(){
     $(function(){
         $('#key-form').submit(function(e){
+            $('#failed').hide();
+            $('#done').hide();
+
             var form = $(this);
             var data = {
                 bits: 2048,
@@ -11,13 +14,19 @@
 
             $('#wait').fadeIn(function(){
                 var keyPair = Crypt.us.Options.generateKeyPair(data)
-                $('#wait').fadeOut();
-                $('#done').fadeIn();
-                if(form.find('input[name=mit]').val() === "on") {
-                    $.post('http://pgp.mit.edu:11371/pks/add', {
-                        keytext: keyPair.publicKeyArmored
-                    });
+                if(keyPair) {
+                    $('#wait').fadeOut();
+                    $('#done').fadeIn();
+                    if(form.find('input[name=mit]').val() === "on") {
+                        $.post('http://pgp.mit.edu:11371/pks/add', {
+                            keytext: keyPair.publicKeyArmored
+                        });
+                    }
+                } else {
+                    $('#wait').fadeOut();
+                    $('#failed').fadeIn();
                 }
+
             });
 
             return e.preventDefault();
