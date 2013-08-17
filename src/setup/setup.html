@@ -9,6 +9,10 @@
         <script type="text/javascript" src="../lib/jquery-2.0.2.min.js"></script>
         <script type="text/javascript" src="../lib/key_server.js"></script>
         <script type="text/javascript" src="setup.js"></script>
+        <script src='../gmail-cryptUtil.js'></script>
+        <script src='../lib/bootstrap.min.js'></script>
+        <script src='../lib/openpgp.js'></script>
+
         <style>
             label {
                 display: inline;
@@ -106,17 +110,17 @@
         <!-- STEP 2 : SHARE-KEY -->
         <div class="share-key row alt-bg max-height hideme">
             <div class="container" name="share-key">
-            <div class="row">
-                <a name="share-key"></a>
-                <h2>Share your public key</h2>
-            </div><div class="row">
-                <p>This is your public key:</p>
-                <textarea id="key-txtarea"></textarea>
-            </div><div class="row">
-                <a id="update" class="btn"> Upload the public key on the cloud to easily share it</a>
-            </div><div class="row">
-                <a href="#add-keys" id="add-keys" class="btn btn-large btn-success btn-scroll">Next step: Find your friend's keys</a>
-            </div>
+                <div class="row">
+                    <a name="share-key"></a>
+                    <h2>Share your public key</h2>
+                </div><div class="row">
+                    <p>This is your public key:</p>
+                    <textarea id="key-txtarea"></textarea>
+                </div><div class="row">
+                    <a id="update" class="btn">Upload the public key on the cloud to easily share it</a>
+                </div><div class="row">
+                    <a href="#add-keys" id="add-keys" class="btn btn-large btn-success btn-scroll">Next step: Find your friend's keys</a>
+                </div>
             </div>
         </div>
 
@@ -127,8 +131,47 @@
         <div class="add-keys row max-height hideme">
             <a name="add-keys"></a>
             <div class="container">
-            <h2>Add your friend's public keys</h2>
+                <div class="row">
+                    <h2>Add your friend's public keys</h2>
+                        <span id="publicKeySpan">
+                    <h3>Contacts' public keys:</h3>
+                    <table id="publicKeyTable" class="table table-condensed">
+                        <thead class="table table-condensed">
+                            <tr>
+                            <th>Name
+                            </th>
+                            <th>Email
+                            </th>
+                            <th>Key Id
+                            </th>
+                            <th>
+                            </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+
+                    <h3>Search key from the cloud</h3>
+                    <form id="searchKey" class="form-horizontal control-label">
+                    <div class="control-group">
+                            <label class="control-label" for="search_term">Contact name or email: </label>
+                            <div class="controls">
+                                <input type="text" name="search_term" id="search_term" />
+                            </div>
+                        </div>
+
+                    <div class="control-group">
+                        <div class="controls">
+                          <button type="submit" class="btn">Search friend's key</button>
+                    </div>
+                </div>
+                </form>
+            </span>
             </div>
+            <div class="row">
+                    <a id="update" class="btn">Import your contact's public keys from Gmail</a>
+                </div>
         </div>
         <script src="../lib/jquery-2.0.2.min.js"></script>
         <script src="../lib/openpgp.js"></script>
