@@ -92,3 +92,7 @@ h2 {
 #share-key {
 	opacity: 0;
 }
+
+#done-import {
+	display:none;
+}
