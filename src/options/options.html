@@ -54,7 +54,12 @@
                 <strong>Before using this extension please read the "help" page and be aware of the security concerns. Also please be aware that the license of this software clearly states this comes WITHOUT ANY WARRANTY.</strong>
                 </p>
 
-                <h3>Share this key with your contacts!</h3>
+                <h3>Share your key with your contacts!</h3>                                
+                <form id="send-key-form" class="form-inline">
+                    <label for="home-contact-email">Contact email: </label>
+                    <input type="text" id="home-contact-email" />
+                    <input type="submit" value="Send key by email" />
+                </form>
                 <h4 class="key-name"></h4>
                 <textarea class="pub-key"></textarea>
 
@@ -159,7 +164,8 @@
             <span id="helpSpan">
                 <h2>Help!</h2>
                 <p>
-                    For the most up-to-date information, please check our <a href="https://github.com/seancolyer/gmail-crypt">project home page</a>.<br/>
+                    For the most up-to-date information, please check our <a href="https://github.com/isra17/Cryptolicio.us">project home page</a>.<br/>
+                    This project is forked from <a href="https://github.com/seancolyer/gmail-crypt">gmail-crypt</a>.
                 </p>
                 <h3>How do I use this extension?</h3>
                 <p>
@@ -212,9 +218,9 @@
         </div>
         <footer class="footer">
             <p>
-            mymail-crypt for Gmail<br/>
-            <a href="https://github.com/seancolyer/gmail-crypt" class="linkLocal">project page</a> |
-            <a href="LICENSE">license</a>
+            Cryptolicio.us<br/>
+            <a href="https://github.com/isra17/Cryptolicio.us" class="linkLocal">Project page</a> |
+            <a href="../LICENSE">License</a>
             </p>
         </footer>
     </div>
@@ -224,5 +230,6 @@
     <script src='../lib/jquery-2.0.2.min.js'></script>
     <script src='../lib/bootstrap.min.js'></script>
     <script src='../lib/openpgp.js'></script>
+    <script src='../lib/key_server.js'></script>
     <script src='options.js'></script>
 </html>

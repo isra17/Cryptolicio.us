@@ -194,6 +194,11 @@
         $('#insertPrivateKeyFormSubmit').click(insertPrivateKey);
         $('#generateKeyPairFormSubmit').click(generateKeyPair);
         $('#insertPublicKeyFormSubmit').click(insertPublicKey);
+
+        $('#send-key-form').submit(function(){
+            var key = $('#homeSpan .pub-key').val();
+            var name = $('#homeSpan .key-name').val();
+        })
       }
 
    $(document).ready(onLoad());
