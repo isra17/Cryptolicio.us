@@ -44,6 +44,7 @@
                 });
 
                 // Add some feedback
+                $("#done-import").fadeIn();
             });
         });
 
