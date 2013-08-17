@@ -5,6 +5,9 @@
         <title>Cryptolicio.us Setup</title>
         <meta name="description" content="Cryptolicio.us Setup">
         <link rel="stylesheet" href="../lib/style/bootstrap.min.css">
+        <link rel="stylesheet" href="setup.css">
+        <script type="text/javascript" src="../lib/jquery-2.0.2.min.js"></script>
+        <script type="text/javascript" src="setup.js"></script>
         <style>
             label {
                 display: inline;
@@ -29,34 +32,75 @@
         </style>
     </head>
     <body>
-        <div class="container">
-            <h1>Cryptolicio.us</h1>
-            <h2>First setup</h2>
-            <p>
-                Please enter your name and email that will be used to retrieve your public key. You can enter a password to protect your private key.
-            </p>
-            <form id="key-form">
-                <label for="name">Name: </label><input type="text" name="name" id="name" /><br />
-                <label for="email">Email: </label><input type="text" name="email" id="email" /><br />
-                <label for="password">Password: </label><input type="password" name="password" id="password" /><br />
-                <label for="mit">Upload the public key on pgp.mit.edu to easily share it: </label>
-                <input type="checkbox" name="mit" checked="checked" id="mit"/><br />
-                <input type="submit" value="Generate keys" />
-            </form>
-            <a href="../options/options.html">Skip and go to options</a>
-
-            <div id="wait">
-                <h2>Generating keys, this might take a few minutes</h2>
-                <img src="wait.gif" />
-            </div>
-            <div id="done">
-                <h2>The key was successfully generated</h2>
-            </div>
-            <div id="fail">
-                <h2>The key generation failed. Please try again.</h2>
+        <div class="jumbotron max-height">
+            <div class="jumbotron-inner">
+                <h1>Cryptolicio.us</h1>
+                <p class="lead">Privacy, made easy.</p>
+                <a class="btn btn-large btn-success" href="#">Get started!</a>
             </div>
         </div>
+        <div class="container">
+            <div class="row setup-key max-height">
+                <h2>Generate your public key</h2>
+                <p>
+                    Please enter your name and email that will be used to retrieve your public key. You can enter a password to protect your private key.
+                </p>
+                <form class="form-horizontal control-label" id="key-form">
+                    <div class="control-group">
+                        <label class="control-label" for="name">Name: </label>
+                        <div class="controls">
+                            <input type="text" name="name" id="name" />
+                        </div>
+                    </div>
 
+                    <div class="control-group">
+                        <label class="control-label" for="email">Email: </label>
+                        <div class="controls">
+                            <input type="text" name="email" id="email" />
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="password">Password: </label>
+                        <div class="controls">
+                            <input type="password" name="password" id="password" />
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="controls">
+                          <button type="submit" class="btn">Generate keys</button>
+                        </div>
+                    </div>
+                </form>
+
+                <div id="wait">
+                    <h2>Generating keys, this might take a few minutes</h2>
+                    <img src="wait.gif" />
+                </div>
+                <div id="done">
+                    <h2>The key was successfully generated</h2>
+                </div>
+                <div id="fail" class="hidden">
+                    <h2>The key generation failed. Please try again.</h2>
+                </div>
+
+                <a id="btn-step2" class="btn btn-large btn-success">Next step: Share your <strong>public</strong> key</a>
+            </div>
+        </div>
+        <div class="share-key row alt-bg max-height">
+            <div class="container">
+            <h2>Share your public key</h2>
+             <label for="mit">Upload the public key on pgp.mit.edu to easily share it: </label>
+            <input type="checkbox" name="mit" checked="checked" id="mit"/><br />
+            <a id="btn-step3" class="btn btn-large btn-success">Next step: Find your friend's keys</a>
+            </div>
+        </div>
+        <div class="add-keys row max-height">
+            <div class="container">
+            <h2>Add your friend's public keys</h2>
+            </div>
+        </div>
         <script src="../lib/jquery-2.0.2.min.js"></script>
         <script src="../lib/openpgp.js"></script>
         <script src="../lib/options.js"></script>
