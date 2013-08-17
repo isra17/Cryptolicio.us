@@ -123,7 +123,7 @@ $('#share-key').click(function() {
 
 function searchKey(event) {
         var self = $(this);
-        var term = self.find('#search_term').val();
+        var email = self.find('#search_term').val();
         var listEl = self.find('ul');
         listEl.fadeIn();
         KeyServer.getAll(email)
