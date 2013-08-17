@@ -264,9 +264,6 @@ chrome.runtime.onMessage.addListener(
     }
 });
 
-
-/*
-**/
 /*
 * ContextMenu
 */
@@ -277,7 +274,7 @@ chrome.runtime.onMessage.addListener(
 
 // A generic onclick callback function.
 function onContextMenuClick(info, tab) {
-
+  window.keyModel.getPublicKey()
 }
 
 // Create one test item for each context type.
