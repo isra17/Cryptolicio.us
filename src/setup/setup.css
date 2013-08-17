@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Lato:100,300,700);
+@import url(http://fonts.googleapis.com/css?family=Lato:100,300,500,700);
 @import url(http://fonts.googleapis.com/css?family=Merriweather);
 
 body {
@@ -6,6 +6,10 @@ body {
 	font-family: 'Lato', sans-serif;
 	font-weight:300;
 	font-size: 16px;
+}
+
+.hideme {
+	opacity: 0;
 }
 
 ::selection {
@@ -46,6 +50,7 @@ body {
 h2 {
 	font-family: 'Merriweather', sans-serif;
 	font-weight:400;
+	margin-top: 60px;
 }
 
 .jumbotron .lead {
@@ -58,6 +63,7 @@ h2 {
 .jumbotron .btn {
 	font-size: 21px;
 	padding: 14px 24px;
+	font-weight: 700;
 }
 
 .setup_private_key {
@@ -66,4 +72,20 @@ h2 {
 
 .alt-bg {
 	background-color:#e2ffe2;
+}
+
+#key-txtarea {
+	height:480px;
+	width:520px;
+}
+
+#share-key, #add-keys {
+	display: block;   
+	margin-left: auto;   
+	margin-right: auto;
+	margin-top: 10px;
+}
+
+#share-key {
+	opacity: 0;
 }
