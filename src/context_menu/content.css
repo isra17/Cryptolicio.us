@@ -1,0 +1,10 @@
+#crypt-box {
+    position: absolute;
+    z-index: 99999;
+    background-color: white;
+    width: 500px;
+    height: 600px;
+    top: 100px;
+    left: 30%;
+    border: 1px solid black;
+}

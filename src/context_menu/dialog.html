@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Cryptolicio.us Setup</title>
+        <meta name="description" content="Cryptolicio.us Setup">
+        <link rel="stylesheet" href="../lib/style/bootstrap.min.css">
+        <style>
+            #crypt-msg {
+                width: 500px;
+                height: 300px;
+                font-family: Monaco,Menlo,Consolas,"Courier New",monospace;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Decrypt</h1>
+            <form>
+                <label class="crypt-enc" for="crypt-email">Sender email: </label><input type="text" id="crypt-email" />
+                <label for="crypt-pass">Password</label><input type="password" id="crypt-pass" /><br />
+                <textarea id="crypt-msg"></textarea><br />
+                <input type="submit" value="decrypt"/>
+            </form>
+        </div>
+
+        <script src="../lib/jquery-2.0.2.min.js"></script>
+        <script src="dialog.js"></script>
+    </body>
+</html>

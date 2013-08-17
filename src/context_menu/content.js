@@ -6,12 +6,7 @@
     };
 
     var decryptElement = function(msg) {
-        console.log(msg);
-        chrome.extension.sendRequest({method: "decrypt", senderEmail:'isra017@gmail.com', msg: msg, password: 'isra'}, function(response){
-            console.log(response);
-            if (response.decrypted) {
-                console.log(response.decrypted);
-            }
+        chrome.extension.sendRequest({method: "decrypt_popup", msg: msg}, function(response){
         });
     };
 
@@ -27,8 +22,9 @@
         }
 
         if(msg === "decrypt") {
-            console.log('decrypt');
-            decryptElement(window.getSelection().toString());
+            //Small nasty hack because for some reasy it get called 10 time in a sec...
+
+            _.throttle(decryptElement(window.getSelection().toString()), 1000);
         }
     });
 })();
