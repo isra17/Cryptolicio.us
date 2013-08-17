@@ -173,9 +173,7 @@
 
     function searchKey(event) {
         var self = $(this);
-        var term = self.find('#search_term').val();
-        var listEl = self.find('ul');
-        listEl.fadeIn();
+        var email = self.find('#search_term').val();
         KeyServer.getAll(email)
         .done(function(keys){
             $.each(keys, function(i, key){
