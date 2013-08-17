@@ -14,9 +14,13 @@
                 margin-top: 10px;
             }
 
-            #wait {
+            #wait, #done {
                 display: none;
                 text-align: center;
+            }
+
+            #done {
+                color: red;
             }
         </style>
     </head>
@@ -40,6 +44,9 @@
             <div id="wait">
                 <h2>Generating keys, this might take a few minutes</h2>
                 <img src="wait.gif" />
+            </div>
+            <div id="done">
+                <h2>The key was successfully generated</h2>
             </div>
         </div>
 

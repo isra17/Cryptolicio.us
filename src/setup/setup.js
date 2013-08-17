@@ -9,15 +9,16 @@
                 password: form.find('input[name=password]').val()
             };
 
-            $('#wait').fadeIn();
-            Crypt.us.Options.generateKeyPair(data, function(keyPair){
+            $('#wait').fadeIn(function(){
+                var keyPair = Crypt.us.Options.generateKeyPair(data)
                 $('#wait').fadeOut();
+                $('#done').fadeIn();
                 if(form.find('input[name=mit]').val() === "on") {
                     $.post('http://pgp.mit.edu:11371/pks/add', {
                         keytext: keyPair.publicKeyArmored
                     });
                 }
-            });
+            });            
 
             return e.preventDefault();
         });
