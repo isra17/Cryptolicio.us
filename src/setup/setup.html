@@ -13,6 +13,11 @@
             input[type=submit] {
                 margin-top: 10px;
             }
+
+            #wait {
+                display: none;
+                text-align: center;
+            }
         </style>
     </head>
     <body>
@@ -31,6 +36,11 @@
                 <input type="submit" value="Generate keys" />
             </form>
             <a href="../options/options.html">Skip and go to options</a>
+
+            <div id="wait">
+                <h2>Generating keys, this might take a few minutes</h2>
+                <img src="wait.gif" />
+            </div>
         </div>
 
         <script src="../lib/jquery-2.0.2.min.js"></script>
