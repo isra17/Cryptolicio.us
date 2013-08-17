@@ -81,7 +81,13 @@
                             <input type="password" name="password" id="password" />
                         </div>
                     </div>
-
+                    <div class="control-group">
+                        <label class="control-label" for="mit">Upload to cloud : </label>
+                        <div class="controls">
+                            <input type="checkbox" name="mit" checked="checked" id="mit"/>
+                        </div>
+                    </div>
+   
                     <div class="control-group">
                         <div class="controls">
                           <button type="submit" class="btn">Generate keys</button>
@@ -117,8 +123,6 @@
                     <p>This is your public key:</p>
                     <textarea id="key-txtarea"></textarea>
                 </div><div class="row">
-                    <a id="update" class="btn">Upload the public key on the cloud to easily share it</a>
-                </div><div class="row">
                     <a href="#add-keys" id="add-keys" class="btn btn-large btn-success btn-scroll">Next step: Find your friend's keys</a>
                 </div>
             </div>
@@ -134,44 +138,57 @@
                 <div class="row">
                     <h2>Add your friend's public keys</h2>
                         <span id="publicKeySpan">
-                    <h3>Contacts' public keys:</h3>
-                    <table id="publicKeyTable" class="table table-condensed">
-                        <thead class="table table-condensed">
-                            <tr>
-                            <th>Name
-                            </th>
-                            <th>Email
-                            </th>
-                            <th>Key Id
-                            </th>
-                            <th>
-                            </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
+                            <h3>Contacts' public keys:</h3>
+                            <table id="publicKeyTable" class="table table-condensed">
+                                <thead class="table table-condensed">
+                                    <tr>
+                                    <th>Name
+                                    </th>
+                                    <th>Email
+                                    </th>
+                                    <th>Key Id
+                                    </th>
+                                    <th>
+                                    </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
 
-                    <h3>Search key from the cloud</h3>
-                    <form id="searchKey" class="form-horizontal control-label">
-                    <div class="control-group">
-                            <label class="control-label" for="search_term">Contact name or email: </label>
-                            <div class="controls">
-                                <input type="text" name="search_term" id="search_term" />
-                            </div>
-                        </div>
+                            <h3>Search key from the cloud</h3>
+                            <form id="searchKey" class="form-horizontal control-label">
+                            <div class="control-group">
+                                    <label class="control-label" for="search_term">Contact name or email: </label>
+                                    <div class="controls">
+                                        <input type="text" name="search_term" id="search_term" />
+                                    </div>
+                                </div>
 
-                    <div class="control-group">
-                        <div class="controls">
-                          <button type="submit" class="btn">Search friend's key</button>
-                    </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                  <button type="submit" class="btn">Search friend's key</button>
+                            </div>                        </form>
+                        </span>
                 </div>
-                </form>
-            </span>
             </div>
-            <div class="row">
-                    <a id="sync_contact" class="btn">Import your contact's public keys from Gmail</a>
+                 <div class="row">
+                        <a id="sync_contact" class="btn">Import your contact's public keys from Gmail</a>
                 </div>
+                <div class="row">
+                    <a href="#done" id="add-keys" class="btn btn-large btn-success btn-scroll">Next step: You are done!</a>
+                </div>
+                </div>
+            </div>
+           
+        </div>
+        <div class="alt-bg hideme max-height">
+            <a name="done"></a>
+            <div class="container">
+                <h2> Congrats, you have successfully complete the setup!</h2>
+
+                <h3>Now, you can start sending encrypted message!</h3>
+            </div>
         </div>
         <script src="../lib/jquery-2.0.2.min.js"></script>
         <script src="../lib/openpgp.js"></script>
