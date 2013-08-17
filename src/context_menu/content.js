@@ -2,17 +2,17 @@
     var lastClickedElement = null;
 
     var encryptElement = function(el) {
-        el = $(el);
+        jEl = $(el);
         var emails = prompt('Please enter the emails of the recipients. Only those persons will be able to decrypt your message. If many, use ; to separate them.')
 
         if(emails) {
             var recipients = {
                 email: emails.split(';')
             }
-            var msg = el.val() || el.text();
+            var msg = jEl.val() || jEl.text();
             chrome.extension.sendRequest({method: "encrypt", recipients: recipients, message: msg}, function(response){
                 console.log(response);
-                el.val(response);
+                jEl.val(response);
             });
         }
     };
@@ -35,7 +35,6 @@
 
         if(msg === "decrypt") {
             //Small nasty hack because for some reasy it get called 10 time in a sec...
-
             _.throttle(decryptElement(window.getSelection().toString()), 1000);
         }
     });
