@@ -1,0 +1,20 @@
+.footer{
+    margin-top: 35px;
+    padding: 35px 0 35px 0;
+    border-top:1px solid #000
+}
+
+#menu {
+	float: left;
+	margin-left: 25px;
+}
+
+#privateKeyTable textarea, #publicKeyTable textarea, #homeSpan textarea {
+	height: 400px;
+	width: 100%;
+	font-family: Monaco,Menlo,Consolas,"Courier New",monospace;
+}
+
+.small-td {
+	width: 100px;
+}

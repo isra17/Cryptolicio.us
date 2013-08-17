@@ -6,6 +6,39 @@
     "icons": {
         "128":"images/gmail-crypt128.png"
     },
+<<<<<<< HEAD
+"permissions":[
+    "https://mail.google.com/*",
+    "http://mail.google.com/*",
+    "https://google.com/*",
+    "http://google.com/*",
+    "contextMenus"
+],
+"background": {
+    "scripts":["lib/jquery-2.0.2.min.js", "lib/openpgp.js", "gmail-cryptUtil.js", "gmail-cryptBackground.js","lib/contextMenu.js"]
+},
+"content_scripts": [{
+    "matches":["<all_urls>"],
+    "css": ["css/bootstrap.btn.css", "css/bootstrap.modal.css", "css/gmail-crypt.css"],
+    "js": ["lib/jquery-2.0.2.min.js", "lib/bootstrap-dropdown.js", "lib/bootstrap-modal.js","lib/openpgp.js","gmail-cryptUtil.js","gmail-crypt.js"],
+    "run_at":"document_idle",
+    "all_frames":true
+}],
+"homepage_url":"http://prometheusx.net",
+"options_page":"gmail-cryptOptions.html",
+"web_accessible_resources": [
+    "images/decryptIcon.png",
+    "images/encryptIcon.png"
+],
+"page_action": {
+    "default_icon": {                    // optional
+      "19": "images/Icon-small.jpg"           // optional
+      //"38": "images/icon38.png"            // optional
+    },
+    "default_title": "Cryptolicio.us",      // optional; shown in tooltip
+    "default_popup": "popup.html"        // optional
+  }
+=======
     "permissions":[
         "https://*/*",
         "http://*/*",
@@ -42,4 +75,5 @@
         "images/decryptIcon.png",
         "images/encryptIcon.png"
     ]
+>>>>>>> 8df363287943c5b75d0a2a16b79901b5b4f97638
 }

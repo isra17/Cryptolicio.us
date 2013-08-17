@@ -1,11 +1,11 @@
-var privateKeyFormToggle = true;
-var publicKeyFormToggle = true;
-var generateKeyFormToggle = true;
-   
+   var privateKeyFormToggle = true;
+   var publicKeyFormToggle = true;
+   var generateKeyFormToggle = true;
+
    function showMessages(msg){
-    console.log(msg); 
+    console.log(msg);
    }
-   
+
    function generateKeyPair(){
         $('.alert').hide();
         var form = $('#generateKeyPairForm');
@@ -16,7 +16,7 @@ var generateKeyFormToggle = true;
         parsePrivateKeys();
         parsePublicKeys();
    }
-   
+
    function insertPrivateKey(){
         $('.alert').hide();
        var privKey = $('#newPrivateKey').val();
@@ -36,7 +36,7 @@ var generateKeyFormToggle = true;
         $('#insertPrivateKeyForm').prepend('<div class="alert alert-error" id="gCryptAlertPassword">Mymail-Crypt for Gmail was unable to read your key. It would be great if you could contact us so we can help figure out what went wrong.</div>');
         return false;
    }
-    
+
    function insertPublicKey(){
         $('.alert').hide();
         var pubKey = $('#newPublicKey').val();
@@ -51,14 +51,20 @@ var generateKeyFormToggle = true;
         $('#insertPublicKeyForm').prepend('<div class="alert alert-error" id="gCryptAlertPassword">Mymail-Crypt for Gmail was unable to read this key. It would be great if you could contact us so we can help figure out what went wrong.</div>');
         return false;
    }
-   
+
    function parsePublicKeys(){
       var keys = openpgp.keyring.publicKeys;
       $('#publicKeyTable>tbody>tr').remove();
       for(var k=0;k<keys.length;k++){
           var key = keys[k];
           var user = gCryptUtil.parseUser(key.obj.userIds[0].text);
-          $('#publicKeyTable>tbody').append('<tr><td class="removeLink" id="'+k+'"><a href="#">remove</a></td><td>'+user.userName+'</td><td>'+user.userEmail+'</td><td>'+util.hexstrdump(key.keyId)+'</td><td><a href="#public'+k+'" data-toggle="modal">show key</a><div class="modal" id="public'+k+'"><a href="#" class="close" data-dismiss="modal">Close</a><br/ >'+key.armored.replace(/\n/g,'<br/ >')+'</div></td></tr>');
+          $('#publicKeyTable>tbody').append(
+              '<tr><td>'+user.userName+'</td>'+
+              '<td>'+user.userEmail+'</td>'+
+              '<td>'+util.hexstrdump(key.keyId)+'</td>'+
+              '<td><a href="#public'+k+'" data-toggle="modal">Show key</a><div class="modal" id="public'+k+'">'+
+                  '<a href="#" class="close" data-dismiss="modal">Close</a><br/ ><textarea>'+key.armored+'</textarea></div></td>'+
+              '<td class="removeLink" id="'+k+'"><a href="#">Remove</a></td></tr>');
           $('#public'+k).hide();
           $('#public'+k).modal({backdrop: true, show: false});
       }
@@ -68,16 +74,35 @@ var generateKeyFormToggle = true;
         parsePublicKeys();
         });
    }
-   
+
    function parsePrivateKeys(){
       var keys = openpgp.keyring.privateKeys;
+      var lastKey = keys.length > 0?
+          keys[keys.length - 1]: null;
+      if(lastKey) {
+          var pubKey = lastKey.obj.extractPublicKey();
+          var keyName = lastKey.obj.userIds.length > 0? lastKey.obj.userIds[0].text: 'Unnamed key';
+
+          $('#homeSpan .key-name').text(keyName);
+          $('#homeSpan .pub-key').text(pubKey);
+      }
+
       $('#privateKeyTable>tbody>tr').remove();
       for(var k=0;k<keys.length;k++){
           var key = keys[k];
           var user = gCryptUtil.parseUser(key.obj.userIds[0].text);
-          $('#privateKeyTable>tbody').append('<tr><td class="removeLink" id="'+k+'"><a href="#">remove</a></td><td>'+user.userName+'</td><td>'+user.userEmail+'</td><td><a href="#private'+k+'" data-toggle="modal">show key</a><div class="modal" id="private'+k+'"><a class="close" data-dismiss="modal">Close</a><br/ >'+key.armored.replace(/\n/g,'<br/ >')+'</div></td></tr>');
+          $('#privateKeyTable>tbody').append(
+              '<tr><td>'+user.userName+'</td>'+
+              '<td>'+user.userEmail+'</td>'+
+              '<td><a href="#private'+k+'" data-toggle="modal">Private key</a><div class="modal" id="private'+k+'">'+ 
+                  '<a class="close" data-dismiss="modal">Close</a><br/ ><textarea>'+key.armored+'</textarea></div></td>'+
+              '<td><a href="#privatepub'+k+'" data-toggle="modal">Public key</a><div class="modal" id="privatepub'+k+'">'+ 
+                  '<a class="close" data-dismiss="modal">Close</a><br/ ><textarea>'+key.obj.extractPublicKey()+'</textarea></div></td>'+
+              '<td class="removeLink" id="'+k+'"><a href="#">Remove</a></td></tr>');
           $('#private'+k).hide();
           $('#private'+k).modal({backdrop: true, show: false});
+          $('#privatepub'+k).hide();
+          $('#privatepub'+k).modal({backdrop: true, show: false});
       }
       $('#privateKeyTable .removeLink').click(function(e){
         openpgp.keyring.removePrivateKey(e.currentTarget.id);
@@ -114,11 +139,11 @@ var generateKeyFormToggle = true;
         } else {
             openpgp.config.config.show_version = false;
         }
-        
+
         openpgp.config.config.gCrypt = gCryptSettings;
         openpgp.config.write();
    }
-   
+
    function loadOptions(){
         var gCryptSettings = openpgp.config.config.gCrypt;
         if (gCryptSettings && gCryptSettings.stopAutomaticDrafts){
@@ -142,7 +167,42 @@ var generateKeyFormToggle = true;
         $(event.currentTarget.hash).show();
        }
    }
-   
+
+    function searchKey(event) {
+        var self = $(this);
+        var term = self.find('#search_term').val();
+        var listEl = self.find('ul');
+        listEl.fadeIn();
+        KeyServer.search(term)
+        .done(function(items){
+            $.each(items, function(key, item){
+                $('<li>'+
+                      '<a tabindex="-1" href="'+item.keyUrl+'">'+item.name+'<span class="date">'+item.date+'</span></a>'+
+                  '</li>')
+                .appendTo(listEl)
+                .find('a')
+                .click(function(e){
+                    var url = $(this).attr('href');
+                    KeyServer.get(url)
+                    .done(function(key){
+                        openpgp.keyring.importPublicKey(key);
+                        openpgp.keyring.store();
+                        parsePublicKeys();
+
+                        self.find('ul').fadeOut(function(){
+                          $(this).find('li').remove();
+                        });
+                    });
+                    e.preventDefault();
+                    return false;
+                })
+            })
+        });
+
+        event.preventDefault();
+        return false;
+    }
+
     function onLoad(){
         openpgp.init();
         parsePrivateKeys();
@@ -154,7 +214,7 @@ var generateKeyFormToggle = true;
         $('#generateKeyPairTitle').click(function() {
             $('#generateKeyPairForm').toggle(generateKeyFormToggle);
             generateKeyFormToggle = !generateKeyFormToggle;
-        });      
+        });
         $('#insertPrivateKeyForm').hide();
         $('#insertPrivateKeyTitle').click(function() {
             $('#insertPrivateKeyForm').toggle(privateKeyFormToggle);
@@ -169,6 +229,12 @@ var generateKeyFormToggle = true;
         $('#insertPrivateKeyFormSubmit').click(insertPrivateKey);
         $('#generateKeyPairFormSubmit').click(generateKeyPair);
         $('#insertPublicKeyFormSubmit').click(insertPublicKey);
+        $('#searchKey').submit(searchKey);
+
+        $('#send-key-form').submit(function(){
+            var key = $('#homeSpan .pub-key').val();
+            var name = $('#homeSpan .key-name').val();
+        })
       }
 
    $(document).ready(onLoad());

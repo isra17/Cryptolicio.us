@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Cryptolicio.us Setup</title>
+        <meta name="description" content="Cryptolicio.us Setup">
+        <link rel="stylesheet" href="../lib/style/bootstrap.min.css">
+        <style>
+            label {
+                display: inline;
+            }
+
+            input[type=submit] {
+                margin-top: 10px;
+            }
+
+            #wait, #done {
+                display: none;
+                text-align: center;
+            }
+
+            #done {
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Cryptolicio.us</h1>
+            <h2>First setup</h2>
+            <p>
+                Please enter your name and email that will be used to retrieve your public key. You can enter a password to protect your private key.
+            </p>
+            <form id="key-form">
+                <label for="name">Name: </label><input type="text" name="name" id="name" /><br />
+                <label for="email">Email: </label><input type="text" name="email" id="email" /><br />
+                <label for="password">Password: </label><input type="text" name="password" id="password" /><br />
+                <label for="mit">Upload the public key on pgp.mit.edu to easily share it: </label>
+                <input type="checkbox" name="mit" checked="checked" id="mit"/><br />
+                <input type="submit" value="Generate keys" />
+            </form>
+            <a href="../options/options.html">Skip and go to options</a>
+
+            <div id="wait">
+                <h2>Generating keys, this might take a few minutes</h2>
+                <img src="wait.gif" />
+            </div>
+            <div id="done">
+                <h2>The key was successfully generated</h2>
+            </div>
+        </div>
+
+        <script src="../lib/jquery-2.0.2.min.js"></script>
+        <script src="../lib/openpgp.js"></script>
+        <script src="../lib/options.js"></script>
+        <script src="setup.js"></script>
+    </body>
+</html>
