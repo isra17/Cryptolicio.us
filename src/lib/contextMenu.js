@@ -4,10 +4,6 @@
 
 // A generic onclick callback function.
 function genericOnClick(info, tab) {
-  
-  console.log("item " + info.menuItemId + " was clicked");
-  console.log("info: " + JSON.stringify(info));
-  console.log("tab: " + JSON.stringify(tab));
 }
 
 // Create one test item for each context type.
@@ -20,4 +16,11 @@ for (var i = 0; i < contexts.length; i++) {
   console.log("'" + context + "' item:" + id);
 }
 
+console.log("About to try creating an invalid item - an error about " +
+            "item 999 should show up");
+
+chrome.contextMenus.create({"title": "Oops", "parentId":999}, function() {
+  if (chrome.extension.lastError) {
+    console.log("Got expected error: " + chrome.extension.lastError.message);
+  }
 });

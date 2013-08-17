@@ -1,6 +1,6 @@
-   var privateKeyFormToggle = true;
-   var publicKeyFormToggle = true;
-   var generateKeyFormToggle = true;
+var privateKeyFormToggle = true;
+var publicKeyFormToggle = true;
+var generateKeyFormToggle = true;
    
    function showMessages(msg){
     console.log(msg); 
