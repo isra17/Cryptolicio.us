@@ -17,9 +17,9 @@
             "lib/jquery-2.0.2.min.js",
             "lib/openpgp.js",
             "lib/key_model.js",
+            "context_menu/background.js",
             "gmail-cryptUtil.js",
             "gmail-cryptBackground.js",
-            "lib/contextMenu.js",
             "setup/installation.js"
         ]
     },
@@ -33,6 +33,20 @@
             "lib/openpgp.js",
             "gmail-cryptUtil.js",
             "gmail-crypt.js"
+        ],
+        "run_at":"document_idle",
+        "all_frames":true
+    }, {
+        "matches": [
+            "https://*/*",
+            "http://*/*"
+        ],
+        "js": [
+            "lib/jquery-2.0.2.min.js",
+            "context_menu/content.js"
+        ],
+        "html": [
+            "context_menu/content.html"
         ],
         "run_at":"document_idle",
         "all_frames":true
