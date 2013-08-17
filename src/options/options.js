@@ -1,11 +1,11 @@
    var privateKeyFormToggle = true;
    var publicKeyFormToggle = true;
    var generateKeyFormToggle = true;
-   
+
    function showMessages(msg){
-    console.log(msg); 
+    console.log(msg);
    }
-   
+
    function generateKeyPair(){
         $('.alert').hide();
         var form = $('#generateKeyPairForm');
@@ -16,7 +16,7 @@
         parsePrivateKeys();
         parsePublicKeys();
    }
-   
+
    function insertPrivateKey(){
         $('.alert').hide();
        var privKey = $('#newPrivateKey').val();
@@ -36,7 +36,7 @@
         $('#insertPrivateKeyForm').prepend('<div class="alert alert-error" id="gCryptAlertPassword">Mymail-Crypt for Gmail was unable to read your key. It would be great if you could contact us so we can help figure out what went wrong.</div>');
         return false;
    }
-    
+
    function insertPublicKey(){
         $('.alert').hide();
         var pubKey = $('#newPublicKey').val();
@@ -51,7 +51,7 @@
         $('#insertPublicKeyForm').prepend('<div class="alert alert-error" id="gCryptAlertPassword">Mymail-Crypt for Gmail was unable to read this key. It would be great if you could contact us so we can help figure out what went wrong.</div>');
         return false;
    }
-   
+
    function parsePublicKeys(){
       var keys = openpgp.keyring.publicKeys;
       $('#publicKeyTable>tbody>tr').remove();
@@ -68,7 +68,7 @@
         parsePublicKeys();
         });
    }
-   
+
    function parsePrivateKeys(){
       var keys = openpgp.keyring.privateKeys;
       $('#privateKeyTable>tbody>tr').remove();
@@ -114,11 +114,11 @@
         } else {
             openpgp.config.config.show_version = false;
         }
-        
+
         openpgp.config.config.gCrypt = gCryptSettings;
         openpgp.config.write();
    }
-   
+
    function loadOptions(){
         var gCryptSettings = openpgp.config.config.gCrypt;
         if (gCryptSettings && gCryptSettings.stopAutomaticDrafts){
@@ -142,7 +142,7 @@
         $(event.currentTarget.hash).show();
        }
    }
-   
+
     function onLoad(){
         openpgp.init();
         parsePrivateKeys();
@@ -154,7 +154,7 @@
         $('#generateKeyPairTitle').click(function() {
             $('#generateKeyPairForm').toggle(generateKeyFormToggle);
             generateKeyFormToggle = !generateKeyFormToggle;
-        });      
+        });
         $('#insertPrivateKeyForm').hide();
         $('#insertPrivateKeyTitle').click(function() {
             $('#insertPrivateKeyForm').toggle(privateKeyFormToggle);

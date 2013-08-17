@@ -7,10 +7,8 @@
         "128":"images/gmail-crypt128.png"
     },
     "permissions":[
-        "https://mail.google.com/*",
-        "http://mail.google.com/*",
-        "https://google.com/*",
-        "http://google.com/*",
+        "https://*/*",
+        "http://*/*",
         "contextMenus"
     ],
     "background": {
@@ -38,7 +36,7 @@
         "all_frames":true
     }],
     "homepage_url":"http://prometheusx.net",
-    "options_page":"gmail-cryptOptions.html",
+    "options_page":"options/options.html",
     "web_accessible_resources": [
         "images/decryptIcon.png",
         "images/encryptIcon.png"
