@@ -2,7 +2,19 @@
     var lastClickedElement = null;
 
     var encryptElement = function(el) {
+        el = $(el);
+        var emails = prompt('Please enter the emails of the recipients. Only those persons will be able to decrypt your message. If many, use ; to separate them.')
 
+        if(emails) {
+            var recipients = {
+                email: emails.split(';')
+            }
+            var msg = el.val() || el.text();
+            chrome.extension.sendRequest({method: "encrypt", recipients: recipients, message: msg}, function(response){
+                console.log(response);
+                el.val(response);
+            });
+        }
     };
 
     var decryptElement = function(msg) {
