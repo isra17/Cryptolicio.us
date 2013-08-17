@@ -11,13 +11,22 @@
         "http://*/*",
         "contextMenus",
         "clipboardWrite",
-        "tabs"
+        "tabs",
+        "https://www.google.com/m8/feeds/*",
+        "https://www.google.com/accounts/OAuthGetRequestToken",
+        "https://www.google.com/accounts/OAuthAuthorizeToken",
+        "https://www.google.com/accounts/OAuthGetAccessToken"
     ],
+
+    "content_security_policy": "script-src 'self' https://www.google.com; object-src 'self'",
     "background": {
         "scripts":[
             "lib/jquery-2.0.2.min.js",
             "lib/openpgp.js",
             "lib/key_model.js",
+            "oauth/chrome_ex_oauth.js",
+            "oauth/chrome_ex_oauthsimple.js",
+            "oauth/background.js",
             "context_menu/background.js",
             "gmail-cryptUtil.js",
             "gmail-cryptBackground.js",
