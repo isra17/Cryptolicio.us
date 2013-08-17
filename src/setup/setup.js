@@ -29,6 +29,21 @@
 
             return e.preventDefault();
         });
+
+        $('#sync_contact').click(function(){
+            chrome.extension.sendRequest({
+                method:'get_contact'
+            }, function(contacts){
+                $.each(contacts, function(i, contact){
+                    $.each(contact.emails, function(i, email){
+                        KeyServer.getAll(email)
+                        .done(function(keys){
+                            Crypt.us.Options.importKeys(keys);
+                        });
+                    });
+                });
+            });
+        });
     })
 })();
 

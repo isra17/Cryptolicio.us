@@ -10,7 +10,15 @@
         openpgp.keyring.store();
 
         return keyPair;
-    }
+    };
+
+    Crypt.us.Options.importKeys = function(keys) {
+        $.each(keys, function(i, key){
+            openpgp.keyring.importPublicKey(key);
+        })
+
+        openpgp.keyring.store();
+    };
 
     openpgp.init();
 
