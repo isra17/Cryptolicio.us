@@ -20,6 +20,10 @@
             }
 
             #done {
+                color: green;
+            }
+
+            #fail {
                 color: red;
             }
         </style>
@@ -34,7 +38,7 @@
             <form id="key-form">
                 <label for="name">Name: </label><input type="text" name="name" id="name" /><br />
                 <label for="email">Email: </label><input type="text" name="email" id="email" /><br />
-                <label for="password">Password: </label><input type="text" name="password" id="password" /><br />
+                <label for="password">Password: </label><input type="password" name="password" id="password" /><br />
                 <label for="mit">Upload the public key on pgp.mit.edu to easily share it: </label>
                 <input type="checkbox" name="mit" checked="checked" id="mit"/><br />
                 <input type="submit" value="Generate keys" />
@@ -47,6 +51,9 @@
             </div>
             <div id="done">
                 <h2>The key was successfully generated</h2>
+            </div>
+            <div id="fail">
+                <h2>The key generation failed. Please try again.</h2>
             </div>
         </div>
 
