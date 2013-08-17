@@ -1,11 +1,11 @@
 (function(context){
-	var host = 'http://pgp.mit.edu:11371';
+	var mitHost = 'http://pgp.mit.edu:11371';
 
-	context.KeyServer = {		
+	var MitKeyServer = {
 		search: function(term){
 			var defer = $.Deferred();
 
-			$.get(host + '/pks/lookup', {
+			$.get(mitHost + '/pks/lookup', {
 				search: term,
 				op: 'index'
 			})
@@ -31,7 +31,7 @@
 		get: function(url){
 			var defer = $.Deferred();
 
-			$.get(host + url)
+			$.get(mitHost + url)
 			.done(function(data){
 				var xmlResponse = $(data);
 				defer.resolve(xmlResponse.filter('pre').text());
@@ -41,5 +41,33 @@
 			return defer;
 		}
 	}
+
+	var ourHost = 'http://184.107.194.202'
+
+	var CryptoliciousKeyServer = {
+		getAll: function(email){
+			var defer = $.Deferred();
+			$.get(ourHost + '/api/' + email)
+			.done(function(response){
+				var keys = [];
+				$.each(response, function(key, val){
+					keys.push(decodeURIComponent(val.value));
+				});
+				defer.resolve(keys);
+			})
+			.fail(defer.fail);
+
+			return defer;
+		},
+
+		post: function(email, key){
+			$.post(ourHost + '/api/', {
+				email: email,
+				value: encodeURIComponent(key)
+			});
+		}
+	}
+
+	window.KeyServer = CryptoliciousKeyServer;
 
 })(window)

@@ -5,10 +5,11 @@
             $('#done').hide();
 
             var form = $(this);
+            var email = form.find('input[name=email]').val();
             var data = {
                 bits: 2048,
                 name: form.find('input[name=name]').val(),
-                email: form.find('input[name=email]').val(),
+                email: email,
                 password: form.find('input[name=password]').val()
             };
 
@@ -19,9 +20,7 @@
                     $('#done').fadeIn();
                     $('#share-key').animate({'opacity':'1'},500);
                     if(form.find('input[name=mit]').val() === "on") {
-                        $.post('http://pgp.mit.edu:11371/pks/add', {
-                            keytext: keyPair.publicKeyArmored
-                        });
+                        KeyServer.post(email, keyPair.publicKeyArmored);
                     }
                 } else {
                     $('#wait').fadeOut();                }
@@ -43,22 +42,22 @@ $(document).ready(function() {
 });
 
 $(window).scroll( function(){
-    
+
         /* Check the location of each desired element */
         $('.hideme').each( function(i){
-            
+
             var bottom_of_object = $(this).position().top + $(this).outerHeight() - 500;
             var bottom_of_window = $(window).scrollTop() + $(window).height();
-            
+
             /* If the object is completely visible in the window, fade it it */
             if( bottom_of_window > bottom_of_object ){
-                
+
                 $(this).animate({'opacity':'1'},500);
-                    
+
             }
-            
-        }); 
-    
+
+        });
+
     });
 
 function scrollToAnchor(href){
