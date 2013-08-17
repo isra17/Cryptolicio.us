@@ -3,7 +3,8 @@ $('form').submit(function(){
     var pass = $('#crypt-pass').val() || '';
     chrome.extension.sendRequest({method: "decrypt", senderEmail:mail, msg: msg, password: pass}, function(response){
         if (response.decrypted) {
-            $('#crypt-msg').val(response.text);
+            $('#crypt-msg').html(response.text);
+            $('#crypt-msg').removeClass('enc');
         }
     });
 
@@ -11,5 +12,5 @@ $('form').submit(function(){
 })
 
 $(window).ready(function(){
-    $('#crypt-msg').val(window.msg);
+    $('#crypt-msg').text(window.msg);
 });

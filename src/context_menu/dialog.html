@@ -11,6 +11,10 @@
                 height: 300px;
                 font-family: Monaco,Menlo,Consolas,"Courier New",monospace;
             }
+
+            .enc {
+                white-space: pre;
+            }
         </style>
     </head>
     <body>
@@ -19,7 +23,7 @@
             <form>
                 <label class="crypt-enc" for="crypt-email">Sender email: </label><input type="text" id="crypt-email" />
                 <label for="crypt-pass">Password</label><input type="password" id="crypt-pass" /><br />
-                <textarea id="crypt-msg"></textarea><br />
+                <div id="crypt-msg" class="enc"></div><br />
                 <input type="submit" value="decrypt"/>
             </form>
         </div>
