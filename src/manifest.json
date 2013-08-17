@@ -10,16 +10,17 @@
         "https://*/*",
         "http://*/*",
         "contextMenus",
-        "clipboardWrite"
+        "clipboardWrite",
+        "tabs"
     ],
     "background": {
         "scripts":[
             "lib/jquery-2.0.2.min.js",
             "lib/openpgp.js",
             "lib/key_model.js",
+            "context_menu/background.js",
             "gmail-cryptUtil.js",
             "gmail-cryptBackground.js",
-            "lib/contextMenu.js",
             "setup/installation.js"
         ]
     },
@@ -33,6 +34,22 @@
             "lib/openpgp.js",
             "gmail-cryptUtil.js",
             "gmail-crypt.js"
+        ],
+        "run_at":"document_idle",
+        "all_frames":true
+    }, {
+        "matches": [
+            "https://*/*",
+            "http://*/*",
+            "file://*/*"
+        ],
+        "js": [
+            "lib/jquery-2.0.2.min.js",
+            "lib/underscore-min.js",
+            "context_menu/content.js"
+        ],
+        "css": [
+            "context_menu/content.css"
         ],
         "run_at":"document_idle",
         "all_frames":true

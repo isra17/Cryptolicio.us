@@ -11,6 +11,7 @@
         var form = $('#generateKeyPairForm');
         var keyPair = openpgp.generate_key_pair(1,parseInt(form.find('#numBits').val(), 10), form.find('#name').val() + ' <' + form.find('#email').val() + '>', form.find('#password').val());
         openpgp.keyring.importPrivateKey(keyPair.privateKeyArmored, form.find('#password').val());
+        keyPair.publicKeyArmored = keyPair.publicKeyArmored.replace(/\n\s+\n=/, '\n=');
         openpgp.keyring.importPublicKey(keyPair.publicKeyArmored);
         openpgp.keyring.store();
         parsePrivateKeys();
@@ -94,9 +95,9 @@
           $('#privateKeyTable>tbody').append(
               '<tr><td>'+user.userName+'</td>'+
               '<td>'+user.userEmail+'</td>'+
-              '<td><a href="#private'+k+'" data-toggle="modal">Private key</a><div class="modal" id="private'+k+'">'+ 
+              '<td><a href="#private'+k+'" data-toggle="modal">Private key</a><div class="modal" id="private'+k+'">'+
                   '<a class="close" data-dismiss="modal">Close</a><br/ ><textarea>'+key.armored+'</textarea></div></td>'+
-              '<td><a href="#privatepub'+k+'" data-toggle="modal">Public key</a><div class="modal" id="privatepub'+k+'">'+ 
+              '<td><a href="#privatepub'+k+'" data-toggle="modal">Public key</a><div class="modal" id="privatepub'+k+'">'+
                   '<a class="close" data-dismiss="modal">Close</a><br/ ><textarea>'+key.obj.extractPublicKey()+'</textarea></div></td>'+
               '<td class="removeLink" id="'+k+'"><a href="#">Remove</a></td></tr>');
           $('#private'+k).hide();
