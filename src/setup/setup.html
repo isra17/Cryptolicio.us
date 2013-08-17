@@ -7,21 +7,24 @@
         <link rel="stylesheet" href="setup.css">
     </head>
     <body>
+        <div>
+            <p>
+                Please enter your name and email that will be used to retrieve your public key. You can enter a password to protect your private key.
+            </p>
+            <form id="key-form">
+                <label for="name">Name: </label><input type="text" name="name" /><br />
+                <label for="email">Email: </label><input type="text" name="email" /><br />
+                <label for="password">Password: </label><input type="text" name="password" /><br />
+                <label for="mit">Upload the public key on pgp.mit.edu to easily share it: </label>
+                <input type="checkbox" name="mit" checked="checked" /><br />
+                <input type="submit" value="Generate keys" />
+            </form>
+            <a href="../options/options.html">Skip and go to options</a>
+        </div>
+
         <script src="../lib/jquery-2.0.2.min.js"></script>
+        <script src="../lib/openpgp.js"></script>
+        <script src="../lib/options.js"></script>
         <script src="setup.js"></script>
     </body>
 </html>
-
-
-<div>
-    <p>
-        Please enter your name and email that will be used to retrieve your public key. You can enter a password to protect your private key.
-    </p>
-    <form id="key-form">
-        <label>Name: </label><input type="text" /><br />
-        <label>Email: </label><input type="text" /><br />
-        <label>Password: </label><input type="text" /><br />
-        <input type="submit" value="Generate keys" />
-    </form>
-    <a href="../options/options.html">Skip and go to options</a>
-</div>
